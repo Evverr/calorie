@@ -228,7 +228,7 @@ export default function App() {
           key={isOnboarding ? 'onboarding' : 'application'}
           showsVerticalScrollIndicator={false}
         >
-          <View style={styles.canvas}>
+          <View style={[styles.canvas, isPhoneWeb && styles.canvasPhoneWeb]}>
           {isOnboarding ? (
             <Onboarding
               onStart={() => {
@@ -550,6 +550,9 @@ const styles = StyleSheet.create({
     paddingTop: 28,
     paddingBottom: 24,
   },
+  canvasPhoneWeb: {
+    paddingTop: 'calc(28px + env(safe-area-inset-top))',
+  } as any,
   onboarding: { alignItems: 'center', gap: 60, width: '100%' },
   onboardingEyebrow: { color: '#000000', fontFamily: 'Inter_400Regular', fontSize: 16, lineHeight: 19 },
   onboardingTitle: {
