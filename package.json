@@ -8,7 +8,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build:vercel": "expo export --platform web --output-dir dist",
+    "build:vercel": "expo export --platform web --output-dir dist && node scripts/inject-pwa-meta.mjs",
     "build:sites": "expo export --platform web --output-dir dist/client && mkdir -p dist/server && cp hosting/server/index.js dist/server/index.js",
     "typecheck": "tsc --noEmit"
   },

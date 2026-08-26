@@ -1,0 +1,18 @@
+{
+  "name": "Калькулятор калорий",
+  "short_name": "Калории",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F9F1FF",
+  "theme_color": "#F9F1FF",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/app-icon.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
