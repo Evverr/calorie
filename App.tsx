@@ -8,6 +8,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -171,6 +172,7 @@ const overviewScreens: Record<NavId, OverviewScreenData> = {
 };
 
 export default function App() {
+  const { width: viewportWidth } = useWindowDimensions();
   const [fontsLoaded] = useFonts({ Inter_400Regular, Inter_700Bold });
   const [celebrationKey, setCelebrationKey] = useState(0);
   const [isOnboarding, setIsOnboarding] = useState(() => {
@@ -210,14 +212,15 @@ export default function App() {
   const gradientLocations = isOnboarding
     ? ([0.3063536, 1] as const)
     : ([0, 1] as const);
+  const isPhoneWeb = Platform.OS === 'web' && viewportWidth <= 500;
 
   return (
-    <View style={styles.screen}>
+    <View style={[styles.screen, isPhoneWeb && styles.screenPhoneWeb]}>
       <StatusBar hidden />
       <LinearGradient
         colors={gradientColors}
         locations={gradientLocations}
-        style={styles.frame}
+        style={[styles.frame, isPhoneWeb && styles.framePhoneWeb]}
       >
         <ScrollView
           bounces={false}
@@ -532,11 +535,13 @@ const styles = StyleSheet.create({
     flex: 1,
     ...(Platform.OS === 'web' ? { paddingVertical: 28 } : null),
   },
+  screenPhoneWeb: { paddingVertical: 0 },
   frame: {
     maxWidth: 393,
     width: '100%',
     ...(Platform.OS === 'web' ? { flexShrink: 0, height: 852 } : { flex: 1 }),
   },
+  framePhoneWeb: { flex: 1, height: '100%' },
   scrollContent: { flexGrow: 1 },
   canvas: {
     width: '100%',
