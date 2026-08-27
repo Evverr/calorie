@@ -679,7 +679,7 @@ const styles = StyleSheet.create({
   celebrationParticle: { left: 196.5, position: 'absolute', top: 739 },
   navBar: { alignItems: 'center', bottom: 24, flexDirection: 'row', justifyContent: 'space-between', left: 28, position: 'absolute', right: 28 },
   navBarPhoneWeb: {
-    bottom: 'calc(24px + env(safe-area-inset-bottom))',
+    bottom: 'calc(4px + env(safe-area-inset-bottom))',
   } as any,
   navButton: { alignItems: 'center', height: 38, justifyContent: 'center', width: 38 },
   navButtonInactive: { opacity: 0.67 },
