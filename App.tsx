@@ -559,7 +559,7 @@ const styles = StyleSheet.create({
     width: '100%',
     ...(Platform.OS === 'web' ? { flexShrink: 0, height: 852 } : { flex: 1 }),
   },
-  framePhoneWeb: { flex: 1, height: '100%' },
+  framePhoneWeb: { flex: 1, height: '100vh', minHeight: '100vh' } as any,
   scrollContent: { flexGrow: 1 },
   canvas: {
     width: '100%',
@@ -569,7 +569,7 @@ const styles = StyleSheet.create({
     paddingBottom: 24,
   },
   canvasPhoneWeb: {
-    minHeight: '100dvh',
+    minHeight: '100vh',
     paddingTop: 'calc(20px + env(safe-area-inset-top))',
   } as any,
   onboarding: { alignItems: 'center', gap: 60, width: '100%' },
