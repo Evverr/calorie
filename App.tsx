@@ -239,12 +239,13 @@ export default function App() {
           ) : (
             <FeatureOverview
               data={overviewScreens[activeNav]}
+              isPhoneWeb={isPhoneWeb}
               onAvatarPress={() => setIsOnboarding(true)}
               onAction={activeNav === 'home' ? completeDay : undefined}
             />
           )}
 
-          {!isOnboarding && <View accessibilityRole="tablist" style={styles.navBar}>
+          {!isOnboarding && <View accessibilityRole="tablist" style={[styles.navBar, isPhoneWeb && styles.navBarPhoneWeb]}>
             {navItems.map((item) => {
               const selected = activeNav === item.id;
               const Icon = item.Icon;
@@ -391,10 +392,12 @@ function Celebration({ burstKey }: { burstKey: number }) {
 
 function FeatureOverview({
   data,
+  isPhoneWeb,
   onAvatarPress,
   onAction,
 }: {
   data: OverviewScreenData;
+  isPhoneWeb: boolean;
   onAvatarPress: () => void;
   onAction?: () => void;
 }) {
@@ -444,6 +447,7 @@ function FeatureOverview({
         onPress={onAction}
         style={({ pressed }) => [
           styles.completeButton,
+          isPhoneWeb && styles.completeButtonPhoneWeb,
           data.buttonColor === 'blue' && styles.completeButtonBlue,
           pressed && data.buttonColor === 'red' && styles.redButtonPressed,
           pressed && data.buttonColor === 'blue' && styles.blueButtonPressed,
@@ -535,7 +539,7 @@ const styles = StyleSheet.create({
     flex: 1,
     ...(Platform.OS === 'web' ? { paddingVertical: 28 } : null),
   },
-  screenPhoneWeb: { paddingVertical: 0 },
+  screenPhoneWeb: { backgroundColor: '#F9F1FF', paddingVertical: 0 },
   frame: {
     maxWidth: 393,
     width: '100%',
@@ -551,6 +555,7 @@ const styles = StyleSheet.create({
     paddingBottom: 24,
   },
   canvasPhoneWeb: {
+    minHeight: '100dvh',
     paddingTop: 'calc(28px + env(safe-area-inset-top))',
   } as any,
   onboarding: { alignItems: 'center', gap: 60, width: '100%' },
@@ -643,12 +648,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   completeButtonBlue: { backgroundColor: '#3366E5' },
+  completeButtonPhoneWeb: {
+    bottom: 'calc(91px + env(safe-area-inset-bottom))',
+  } as any,
   redButtonPressed: { backgroundColor: '#EA4A4A', transform: [{ scale: 0.98 }] },
   blueButtonPressed: { backgroundColor: '#5B8DEF', transform: [{ scale: 0.98 }] },
   completeText: { color: '#FFFFFF', fontFamily: 'Inter_400Regular', fontSize: 15, lineHeight: 18, marginLeft: 10 },
   celebrationLayer: { ...StyleSheet.absoluteFillObject, overflow: 'hidden', zIndex: 10 },
   celebrationParticle: { left: 196.5, position: 'absolute', top: 739 },
   navBar: { alignItems: 'center', bottom: 24, flexDirection: 'row', justifyContent: 'space-between', left: 28, position: 'absolute', right: 28 },
+  navBarPhoneWeb: {
+    bottom: 'calc(24px + env(safe-area-inset-bottom))',
+  } as any,
   navButton: { alignItems: 'center', height: 38, justifyContent: 'center', width: 38 },
   navButtonInactive: { opacity: 0.67 },
   navButtonPressed: { transform: [{ scale: 0.94 }] },
