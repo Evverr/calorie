@@ -563,7 +563,7 @@ const styles = StyleSheet.create({
     width: 315,
   },
   onboardingIllustrationViewport: { height: 275, overflow: 'hidden', width: 297 },
-  onboardingIllustration: { height: 317, position: 'absolute', top: -33, width: 297 },
+  onboardingIllustration: { height: 275, width: 297 },
   onboardingBody: {
     color: '#595959',
     fontFamily: 'Inter_400Regular',
