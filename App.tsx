@@ -422,14 +422,14 @@ function FeatureOverview({
         <Text style={styles.modeText}>{data.date}</Text>
       </View>
 
-      <View style={styles.headingRow}>
+      <View style={[styles.headingRow, isPhoneWeb && styles.headingRowPhoneWeb]}>
         <Text style={styles.heading}>{data.title}</Text>
         <Pressable accessibilityLabel="Открыть стартовый экран" hitSlop={8} onPress={onAvatarPress} style={styles.avatar}>
           <Image source={require('./assets/user-avatar.png')} style={styles.avatarImage} />
         </Pressable>
       </View>
 
-      <View style={styles.balanceCard}>
+      <View style={[styles.balanceCard, isPhoneWeb && styles.balanceCardPhoneWeb]}>
         {data.showCalorieRing ? (
           <CalorieDiagram />
         ) : (
@@ -444,15 +444,15 @@ function FeatureOverview({
         </View>
       </View>
 
-      <View style={styles.metricRow}>
+      <View style={[styles.metricRow, isPhoneWeb && styles.metricRowPhoneWeb]}>
         {data.metrics.map((metric) => (
-          <MetricCard key={metric.label} value={metric.value} label={metric.label} />
+          <MetricCard compact={isPhoneWeb} key={metric.label} value={metric.value} label={metric.label} />
         ))}
       </View>
 
-      <Text style={styles.sectionTitle}>{data.sectionTitle}</Text>
-      <View style={styles.mealList}>
-        {data.rows.map((row) => <OverviewRow key={row.title} {...row} />)}
+      <Text style={[styles.sectionTitle, isPhoneWeb && styles.sectionTitlePhoneWeb]}>{data.sectionTitle}</Text>
+      <View style={[styles.mealList, isPhoneWeb && styles.mealListPhoneWeb]}>
+        {data.rows.map((row) => <OverviewRow compact={isPhoneWeb} key={row.title} {...row} />)}
       </View>
 
       <Pressable
@@ -486,9 +486,9 @@ function CalorieDiagram() {
   );
 }
 
-function MetricCard({ value, label }: { value: string; label: string }) {
+function MetricCard({ compact, value, label }: { compact?: boolean; value: string; label: string }) {
   return (
-    <View style={styles.metricCard}>
+    <View style={[styles.metricCard, compact && styles.metricCardPhoneWeb]}>
       <Text style={styles.metricValue}>{value}</Text>
       <Text style={styles.metricLabel}>{label}</Text>
     </View>
@@ -523,9 +523,9 @@ function MealRow({
   );
 }
 
-function OverviewRow({ title, description, status }: { title: string; description: string; status: string }) {
+function OverviewRow({ compact, title, description, status }: { compact?: boolean; title: string; description: string; status: string }) {
   return (
-    <View style={styles.mealRow}>
+    <View style={[styles.mealRow, compact && styles.mealRowPhoneWeb]}>
       <MealIcon height={27} style={styles.mealIcon} width={27} />
       <View style={styles.mealCopy}>
         <Text style={styles.mealTitle}>{title}</Text>
@@ -570,7 +570,7 @@ const styles = StyleSheet.create({
   },
   canvasPhoneWeb: {
     minHeight: '100dvh',
-    paddingTop: 'calc(28px + env(safe-area-inset-top))',
+    paddingTop: 'calc(20px + env(safe-area-inset-top))',
   } as any,
   onboarding: { alignItems: 'center', gap: 60, width: '100%' },
   onboardingEyebrow: { color: '#000000', fontFamily: 'Inter_400Regular', fontSize: 16, lineHeight: 19 },
@@ -603,6 +603,7 @@ const styles = StyleSheet.create({
   modeRow: { flexDirection: 'row', alignItems: 'center', gap: 20 },
   modeText: { color: '#000000', fontFamily: 'Inter_400Regular', fontSize: 16, lineHeight: 19 },
   headingRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: 18 },
+  headingRowPhoneWeb: { marginTop: 12 },
   heading: { color: '#000000', fontFamily: 'Inter_700Bold', fontSize: 28, lineHeight: 34 },
   avatar: { alignItems: 'center', justifyContent: 'center', height: 49, marginTop: 5, width: 49 },
   avatarImage: { borderRadius: 24.5, height: 49, width: 49 },
@@ -616,6 +617,7 @@ const styles = StyleSheet.create({
     marginTop: 39,
     paddingLeft: 24,
   },
+  balanceCardPhoneWeb: { height: 146, marginTop: 24 },
   calorieRing: { alignItems: 'center', height: 78, justifyContent: 'center', width: 78 },
   calorieRingAsset: { height: 78, position: 'absolute', transform: [{ scaleY: -1 }], width: 78 },
   weeklyBadge: { alignItems: 'center', backgroundColor: '#F2E8FF', borderRadius: 39, height: 78, justifyContent: 'center', width: 78 },
@@ -627,6 +629,7 @@ const styles = StyleSheet.create({
   balanceValue: { color: '#000000', fontFamily: 'Inter_700Bold', fontSize: 28, lineHeight: 34, marginTop: 1 },
   balanceDescription: { color: '#868686', fontFamily: 'Inter_400Regular', fontSize: 13, lineHeight: 16, marginTop: 1 },
   metricRow: { flexDirection: 'row', gap: 19, marginTop: 17 },
+  metricRowPhoneWeb: { marginTop: 12 },
   metricCard: {
     ...shadow,
     backgroundColor: '#FFFFFF',
@@ -636,11 +639,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 22,
   },
+  metricCardPhoneWeb: { height: 74 },
   metricValue: { color: '#000000', fontFamily: 'Inter_700Bold', fontSize: 20, lineHeight: 24 },
   metricLabel: { color: '#000000', fontFamily: 'Inter_400Regular', fontSize: 16, lineHeight: 19, marginTop: 4 },
   sectionTitle: { color: '#000000', fontFamily: 'Inter_400Regular', fontSize: 16, lineHeight: 19, marginTop: 36 },
+  sectionTitlePhoneWeb: { marginTop: 24 },
   mealList: { marginTop: 17 },
+  mealListPhoneWeb: { marginTop: 8 },
   mealRow: { alignItems: 'center', borderBottomColor: 'rgba(129,52,249,0.10)', borderBottomWidth: 1.2, flexDirection: 'row', height: 64 },
+  mealRowPhoneWeb: { height: 52 },
   mealRowPressed: { backgroundColor: 'rgba(129,52,249,0.04)' },
   mealIcon: { height: 27, marginLeft: 3, width: 27 },
   mealCopy: { marginLeft: 8 },
