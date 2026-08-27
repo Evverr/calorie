@@ -200,6 +200,13 @@ export default function App() {
     document.head.appendChild(script);
   }, []);
 
+  useEffect(() => {
+    if (Platform.OS !== 'web' || typeof document === 'undefined') return;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', isOnboarding ? '#F4E6FF' : '#F9F1FF');
+  }, [isOnboarding]);
+
   if (!fontsLoaded) return <View style={styles.loading} />;
 
   const completeDay = () => {
@@ -215,7 +222,13 @@ export default function App() {
   const isPhoneWeb = Platform.OS === 'web' && viewportWidth <= 500;
 
   return (
-    <View style={[styles.screen, isPhoneWeb && styles.screenPhoneWeb]}>
+    <View
+      style={[
+        styles.screen,
+        isPhoneWeb && styles.screenPhoneWeb,
+        isPhoneWeb && isOnboarding && styles.screenPhoneWebOnboarding,
+      ]}
+    >
       <StatusBar hidden />
       <LinearGradient
         colors={gradientColors}
@@ -540,6 +553,7 @@ const styles = StyleSheet.create({
     ...(Platform.OS === 'web' ? { paddingVertical: 28 } : null),
   },
   screenPhoneWeb: { backgroundColor: '#F9F1FF', paddingVertical: 0 },
+  screenPhoneWebOnboarding: { backgroundColor: '#F4E6FF' },
   frame: {
     maxWidth: 393,
     width: '100%',
