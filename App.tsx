@@ -670,7 +670,7 @@ const styles = StyleSheet.create({
   },
   completeButtonBlue: { backgroundColor: '#3366E5' },
   completeButtonPhoneWeb: {
-    bottom: 'calc(91px + env(safe-area-inset-bottom))',
+    bottom: 'calc(70px + env(safe-area-inset-bottom))',
   } as any,
   redButtonPressed: { backgroundColor: '#EA4A4A', transform: [{ scale: 0.98 }] },
   blueButtonPressed: { backgroundColor: '#5B8DEF', transform: [{ scale: 0.98 }] },
