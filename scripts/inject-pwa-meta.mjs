@@ -2,7 +2,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 const indexPath = new URL('../dist/index.html', import.meta.url);
 const pwaHead = `
-    <meta name="theme-color" content="#F9F1FF" />
+    <meta name="theme-color" content="#F4E6FF" />
+    <meta name="color-scheme" content="light" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
