@@ -285,7 +285,7 @@ function Onboarding({ onStart }: { onStart: () => void }) {
       <View style={styles.onboardingIllustrationViewport}>
         <Image
           resizeMode="contain"
-          source={require('./assets/diet-benefit-hero.jpg')}
+          source={require('./assets/diet-benefit-hero-cutout.png')}
           style={styles.onboardingIllustration}
         />
       </View>
