@@ -8,7 +8,8 @@ const pwaHead = `
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Калории" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="/app-icon.png" />`;
+    <link rel="apple-touch-icon" href="/app-icon.png" />
+    <style>@media (max-width: 500px) { html, body, #root { background: #F9F1FF !important; } }</style>`;
 
 const html = readFileSync(indexPath, 'utf8')
   .replace('<html lang="en">', '<html lang="ru">')
